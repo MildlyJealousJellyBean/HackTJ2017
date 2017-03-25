@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <body>
+    <h1>The XMLHttpRequest Object</h1>
+    <div id="demo">
+        <form>
+        <label for="userid">User ID</label>
+        <input type="text" id="userid">
+        <button type="button" onclick="loadDoc(document.getElementById('userid').value)">Change Content</button>
+        </form>
+        <strong><div id="phototitle">
+            
+            </div></strong>
+    </div>
+
+    <script>
+        function loadDoc(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    myObj = JSON.parse(this.responseText);
+                    var str2= displayUserDetails(myObj);
+                    alert(str2);
+                   document.getElementById("phototitle").innerHTML = str2;
+                }
+            };
+                xhttp.open("GET", "https://jsonplaceholder.typicode.com/users/"+id, true);
+            xhttp.send();
+        };
+        function displayUserDetails (userObject){
+           // alert("a");
+            var str1 = "";
+            
+            str1+="<ul>";
+                str1+="<li>";
+                str1+="name:";
+                //alert(userObject.name;
+                str1+=userObject.name;
+                str1+="</li>";      
+                str1+="<li>";
+                str1+="email:";
+                str1+=userObject.email;
+                str1+="</li>";
+                str1+="<li>";
+                str1+="phone:";
+                str1+=userObject.phone;
+                str1+="</li>";
+                str1+="<li>";
+                str1+="website:";
+                str1+=userObject.website;
+                str1+="</li>";
+           str1+="</ul>";
+           return str1;
+        };
+    </script>
+    </body>
+</html>
+
+
+
