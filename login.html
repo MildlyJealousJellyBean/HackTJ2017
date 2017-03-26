@@ -1,0 +1,109 @@
+<html><head>
+<title>Finance Planner - Log in</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
+
+<!-- Optional theme -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet" crossorigin="anonymous" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
+  <!--<link rel="stylesheet" type="text/css" href="login.css"></link>-->
+  <!-- Nessie Required Files -->
+  <script src="lib/require-jquery.js" data-main="lib/capital_one"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script><script src="lib/capital_one.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="capital_one"></script><script src="lib/account.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="account"></script><script src="lib/atm.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="atm"></script><script src="lib/bills.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bills"></script><script src="lib/branch.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="branch"></script><script src="lib/customer.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="customer"></script><script src="lib/deposit.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="deposit"></script><script src="lib/withdrawal.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="withdrawal"></script><script src="lib/merchant.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="merchant"></script><script src="lib/purchase.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="purchase"></script><script src="lib/transfer.js" type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="transfer"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAsjOZUyEP0wPoLLJZilDlpSRK89wBH5AM",
+    authDomain: "capitalonehacktj2017.firebaseapp.com",
+    databaseURL: "https://capitalonehacktj2017.firebaseio.com",
+    storageBucket: "capitalonehacktj2017.appspot.com",
+    messagingSenderId: "501728170864"
+  };
+  firebase.initializeApp(config);
+  database = firebase.database();
+</script>
+<script src="functions.js"></script>
+  <!-- Some Basic Stylin' -->
+  <style>
+    body { 
+      background-color: #5a668a;
+      font-family: 'Helvetica', 'Arial';
+      }
+  </style>
+</head>
+<body>
+<img src="capone.png" alt="Capital One" style="width:304px;height:228px;">
+<span style = "position:absolute;top:0px;right:0px;">
+  <img src="FinancePlanner.png" alt="Finance Planner" style="width:304px;height:228px;">
+</span>
+<div class="container">
+  <div class="row text-center">
+ <h1 style="color: white">Finance Planner - Log in</h1>
+ <div class="col-sm-6 col-sm-offset-3">
+  <form class="form-horizontal">
+    <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="username">Username</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="username" type="text" placeholder="Username">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="password">Password</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="password" type="password" placeholder="Password">
+    </div>
+  </div>
+  <button class="btn btn-default" onclick="login()" type="button">Log in</button>
+  </form>
+  You can also <a href = "signup.html">sign up</a>.
+  </div>
+  </div>
+</div>
+  <script type="text/javascript">
+    // Set API key here!
+    var apiKey = '48b83538f8fad4f5425d6183c6b961d5';
+
+    var cust;
+
+    $(function() {
+      // set the modules being used
+      require(['customer'], function (customer) {
+
+        // initialize customer and account
+        cust = customer.initWithKey(apiKey);
+
+        // make the API Calls
+        //postCustomer(apiKey, cust);
+        //getCustomer(apiKey, cust);
+      });
+    });
+    var customer;
+    var c;
+    
+    function login() {
+      var username = $("#username").val();
+      var password = $("#password").val();
+      //console.log(username);
+      function check(snapshot) {
+        x = snapshot;
+        //console.log(snapshot);
+        customer = snapshot.val();
+        c = customer;
+        if(customer.password != password) { //Bad login
+          alert("Invalid login");
+          return;
+        }
+        c = customer;
+        window.location = "home.html?uname=" + username;
+      }
+      customer = getCustomerFB(username, check);
+    }
+
+  </script>
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+ 
+
+
+</body>
+</html>

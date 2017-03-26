@@ -1,0 +1,183 @@
+<html>
+<head>
+  <title>Finance Planner - Sign up</title>
+  <!-- Nessie Required Files -->
+  <script data-main="lib/capital_one" src="lib/require-jquery.js"></script>
+  <script src="lib/account.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAsjOZUyEP0wPoLLJZilDlpSRK89wBH5AM",
+    authDomain: "capitalonehacktj2017.firebaseapp.com",
+    databaseURL: "https://capitalonehacktj2017.firebaseio.com",
+    storageBucket: "capitalonehacktj2017.appspot.com",
+    messagingSenderId: "501728170864"
+  };
+  firebase.initializeApp(config);
+  database = firebase.database();
+</script>
+<script src = "functions.js"></script>
+  <!-- Some Basic Stylin' -->
+  <style>
+    body { 
+      background-color: #5a668a;
+      font-family: 'Helvetica', 'Arial' }
+  </style>
+</head>
+<body>
+<img src="capone.png" alt="Capital One" style="width:304px;height:228px;">
+<span style = "position:absolute;top:0px;right:0px;">
+  <img src="FinancePlanner.png" alt="Finance Planner" style="width:304px;height:228px;">
+</span>
+<div class="container">
+  <div class="row text-center">
+<h1 style="color:white">Finance Planner - Sign up</h1>
+<div class="col-sm-6 col-sm-offset-3">
+  <form id = "theForm" class="form-horizontal">
+    <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="username">Username</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="username" type="text" placeholder="Username">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="password1">Password</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="password1" type="password" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="password2">Retype password</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="password2" type="password" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="fname">First Name</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="fname" type="text" placeholder="First Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="lname">Last Name</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="lname" type="text" placeholder="Last Name">
+    </div>
+  </div>
+<div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="nickname">Nickname</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="nickname" type="text" placeholder="Nickname">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="acntNum">Account Number (must be 16 digits)</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="acntNum" type="text" placeholder="Account Number">
+    </div>
+  </div>
+  <h3 style="color: white">Address</h3>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="streetNum">#</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="streetNum" type="text" placeholder="#">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="street">Street</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="street" type="text" placeholder="Street">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="state">State</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="state" type="text" placeholder="State">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="city">City</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="city" type="text" placeholder="City">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" style="color: white" for="zip">Zip</label>
+    <div class="col-sm-9">
+    <input class="form-control" id="zip" type="text" placeholder="Zip">
+    </div>
+  </div>
+
+ <button class="btn btn-default" onclick="signup()" type="button">Sign Up</button>
+  </form>
+  </div>
+  </div>
+</div>
+  <script type="text/javascript">
+    // Set API key here!
+    var apiKey = '48b83538f8fad4f5425d6183c6b961d5';
+
+    var cust;
+    var acct;
+
+    $(function() {
+      // set the modules being used
+      require(['customer'], function (customer) {
+
+        // initialize customer and account
+        cust = customer.initWithKey(apiKey);
+
+        // make the API Calls
+        //postCustomer(apiKey, cust);
+        //getCustomer(apiKey, cust);
+      });
+      require(['account'], function (account) {
+
+        // initialize customer and account
+        acct = account.initWithKey(apiKey);
+
+        // make the API Calls
+        //postCustomer(apiKey, cust);
+        //getCustomer(apiKey, cust);
+      });
+    });
+
+    
+    function signup() {
+      var username = $("#username").val();
+      var password1 = $("#password1").val();
+      var password2 = $("#password2").val();
+      if(password1 != password2) {
+        alert("Both passwords need to be the same");
+      }
+      else {
+        var fname =  $("#fname").val();
+        var lname =  $("#lname").val();
+        var nickname =  $("#lname").val();
+        var streetNum = $("#streetNum").val();
+        var acntNum = $("#acntNum").val();
+        var street = $("#street").val();
+        var state = $("#state").val();
+        var city = $("#city").val();
+        var zip = $("#zip").val();
+
+        if(!acct.getAccountById(acntNum)) {
+          alert("Your account number is already taken");
+          return;
+        }
+        
+        createCustomerFB(username, password1, fname, lname, streetNum, street, city, state, zip);
+        createCustomerCapitalOne(fname, lname, streetNum, street, city, state, zip);
+        var id = getCustomerCapitalOne({"first_name": fname, "last_name": lname})._id;
+        console.log(id);
+        createAccountCapitalOne(id, nickname, acntNum);
+
+        window.location = "home.html?uname=" + username;  
+      }
+    }
+
+  </script>
+  
+</body>
+</html>
